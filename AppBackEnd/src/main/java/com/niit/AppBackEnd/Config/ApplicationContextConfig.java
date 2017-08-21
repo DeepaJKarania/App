@@ -26,26 +26,25 @@ public class ApplicationContextConfig {
 
 	@Autowired
 	@Bean(name = "dataSource")
-	public DriverManagerDataSource getDataSource() {
+	public DataSource getH2DataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		
-		dataSource.setUrl("jdbc:h2:tcp://localhost/~/test");
+		dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
+		dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
 
-		dataSource.setDriverClassName("org.h2.Driver");
-
-		dataSource.setUsername("sa");
-		//dataSource.setPassword("");
+		dataSource.setUsername("admin");
+		dataSource.setPassword("password");
 		
 		
 		return dataSource;
 	}
 
-	
-	private Properties getHibernateProperties() {
+	private Properties getHibernateProperties()
+
+	{
 		Properties properties = new Properties();
 		properties.put("hibernate.hbm2ddl.auto", "update");
-		properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-	    properties.put("hibernate.show_sql", "true");
+		properties.put("hibernate.show.sql", "true");
+		properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
 		return properties;
 	}
 	@Autowired
