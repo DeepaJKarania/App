@@ -26,7 +26,7 @@ public class ApplicationContextConfig {
 
 	@Autowired
 	@Bean(name = "dataSource")
-	public DataSource getH2DataSource() {
+	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
 		dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
